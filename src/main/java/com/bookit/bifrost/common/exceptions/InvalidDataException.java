@@ -6,7 +6,7 @@ import com.bookit.bifrost.common.util.TargetType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class InvalidDataException extends UserException {
+public class InvalidDataException extends BifrostException {
 
     public static final Logger log = LoggerFactory.getLogger(InvalidDataException.class);
 

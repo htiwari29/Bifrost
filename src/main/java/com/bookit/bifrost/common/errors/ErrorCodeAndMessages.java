@@ -48,4 +48,8 @@ public class ErrorCodeAndMessages {
 
     public static final int USER_NOT_FOUND_BY_EMAIL_CODE = 1010;
 
+    public static final String JWT_CREATION_ERROR_MSG = "Error while creating JWT token";
+
+    public static final int JWT_CREATION_ERROR_CODE = 1011;
+
 }

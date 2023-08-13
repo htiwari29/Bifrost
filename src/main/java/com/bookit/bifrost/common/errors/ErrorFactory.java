@@ -46,4 +46,9 @@ public class ErrorFactory {
                 ErrorCodeAndMessages.ERROR_WHEN_RETRIEVING_USER_BY_EMAIL_MSG);
     }
 
+    public static Errors JWTCreationError(){
+        return new Errors(TargetType.JWT_CREATION_ERROR.name(), ErrorCodeAndMessages.JWT_CREATION_ERROR_CODE,
+                ErrorCodeAndMessages.JWT_CREATION_ERROR_MSG);
+    }
+
 }
