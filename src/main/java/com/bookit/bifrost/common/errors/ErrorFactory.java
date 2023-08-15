@@ -31,19 +31,25 @@ public class ErrorFactory {
                 ErrorCodeAndMessages.ERROR_WHEN_RETRIEVING_USER_BY_ID_MSG);
     }
 
-    public static Errors userNotFoundWhileRetrievingUserById(){
-        return new Errors(TargetType.USER_RETRIEVAL.name(), ErrorCodeAndMessages.USER_NOT_FOUND_BY_ID_CODE,
-                ErrorCodeAndMessages.USER_NOT_FOUND_BY_ID_MSG);
+    public static Errors userNotFoundWhileRetrievingUserByUsername(){
+        return new Errors(TargetType.USER_RETRIEVAL.name(), ErrorCodeAndMessages.USER_NOT_FOUND_BY_USERNAME_CODE,
+                ErrorCodeAndMessages.USER_NOT_FOUND_BY_USERNAME_MSG);
     }
 
-    public static Errors userNotFoundWhileRetrievingUserByEmail(){
-        return new Errors(TargetType.USER_RETRIEVAL.name(), ErrorCodeAndMessages.USER_NOT_FOUND_BY_EMAIL_CODE,
-                ErrorCodeAndMessages.USER_NOT_FOUND_BY_EMAIL_MSG);
+    public static Errors userNotFoundWhileRetrievingUserByUsernameAndTenantId(){
+        return new Errors(TargetType.USER_RETRIEVAL.name(),
+                ErrorCodeAndMessages.USER_DOES_NOT_EXISTS_WITH_GIVEN_USERNAME_AND_TENANT_ID_CODE,
+                ErrorCodeAndMessages.USER_DOES_NOT_EXISTS_WITH_GIVEN_USERNAME_AND_TENANT_ID);
     }
 
     public static Errors databaseFailureExceptionWhileRetrievingUserByEmail(){
         return new Errors(TargetType.USER_RETRIEVAL.name(), ErrorCodeAndMessages.ERROR_WHEN_RETRIEVING_USER_BY_EMAIL_CODE,
                 ErrorCodeAndMessages.ERROR_WHEN_RETRIEVING_USER_BY_EMAIL_MSG);
+    }
+
+    public static Errors jwtCreationError(){
+        return new Errors(TargetType.JWT_CREATION.name(), ErrorCodeAndMessages.JWT_CREATION_ERROR_CODE,
+                ErrorCodeAndMessages.JWT_CREATION_ERROR_MSG);
     }
 
 }

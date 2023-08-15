@@ -5,7 +5,7 @@ import com.bookit.bifrost.common.errors.Errors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DatabaseFailureException extends UserException {
+public class DatabaseFailureException extends BifrostException {
 
     public static final Logger log = LoggerFactory.getLogger(DatabaseFailureException.class);
 

@@ -36,16 +36,20 @@ public class ErrorCodeAndMessages {
 
     public static final int ERROR_WHEN_RETRIEVING_USER_BY_ID_CODE = 1007;
 
-    public static final String USER_NOT_FOUND_BY_ID_MSG = "User does not exists with given id";
+    public static final String USER_NOT_FOUND_BY_USERNAME_MSG = "User does not exists with given username";
 
-    public static final int USER_NOT_FOUND_BY_ID_CODE = 1008;
+    public static final int USER_NOT_FOUND_BY_USERNAME_CODE = 1008;
 
     public static final String ERROR_WHEN_RETRIEVING_USER_BY_EMAIL_MSG = "Database failure while retrieving user by email";
 
     public static final int ERROR_WHEN_RETRIEVING_USER_BY_EMAIL_CODE = 1009;
 
-    public static final String USER_NOT_FOUND_BY_EMAIL_MSG = "User does not exists with given email";
+    public static final String USER_DOES_NOT_EXISTS_WITH_GIVEN_USERNAME_AND_TENANT_ID = "User does not exists with given username and tenantId";
 
-    public static final int USER_NOT_FOUND_BY_EMAIL_CODE = 1010;
+    public static final int USER_DOES_NOT_EXISTS_WITH_GIVEN_USERNAME_AND_TENANT_ID_CODE = 1010;
+
+    public static final String JWT_CREATION_ERROR_MSG = "Error while creating JWT token";
+
+    public static final int JWT_CREATION_ERROR_CODE = 1011;
 
 }
