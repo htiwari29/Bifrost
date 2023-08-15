@@ -10,7 +10,7 @@ public class JWTCreationException extends BifrostException {
     }
 
     public static JWTCreationException whileCreatingToken(Exception ex){
-        throw new JWTCreationException(ex, ErrorFactory.JWTCreationError());
+        throw new JWTCreationException(ex, ErrorFactory.jwtCreationError());
     }
 
 }
