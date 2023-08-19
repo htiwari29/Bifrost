@@ -2,41 +2,19 @@ package com.bookit.bifrost.appservices;
 
 import com.bookit.bifrost.common.errors.ErrorFactory;
 import com.bookit.bifrost.common.exceptions.BifrostException;
-import com.bookit.bifrost.common.util.TenantUserToken;
 import com.bookit.bifrost.domain.User;
 import com.bookit.bifrost.domain.repositories.UserRepository;
-import com.bookit.bifrost.entrypoints.dtos.UserDetail;
-import org.jvnet.hk2.annotations.Service;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserRetrievalService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserRetrievalService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
-
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userByUsername(username);
-        return UserDetail.build(user);
-    }
-
-    @Transactional
-    public UserDetails loadUserDetails(Authentication authentication){
-        String tenantId = ((TenantUserToken) authentication).getTenantId();
-        String username = authentication.getName();
-        User user = userByUsernameAndTenantId(username, tenantId);
-        return UserDetail.build(user);
     }
 
     public User userByUsername(String username) {

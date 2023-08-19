@@ -1,6 +1,6 @@
 package com.bookit.bifrost.filters;
 
-import com.bookit.bifrost.appservices.UserService;
+import com.bookit.bifrost.appservices.UserDetailService;
 import com.bookit.bifrost.common.util.JWTHelper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,11 +24,11 @@ public class TokenFilter extends OncePerRequestFilter {
 
     private final JWTHelper jwtHelper;
 
-    private final UserService userService;
+    private final UserDetailService userDetailService;
 
-    public TokenFilter(JWTHelper jwtHelper, UserService userService) {
+    public TokenFilter(JWTHelper jwtHelper, UserDetailService userDetailService) {
         this.jwtHelper = jwtHelper;
-        this.userService = userService;
+        this.userDetailService = userDetailService;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (Objects.nonNull(jwt) && jwtHelper.validateToken(jwt)){
                 String username = jwtHelper.userNameFromToken(jwt);
-                UserDetails userDetails = userService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
                         null, userDetails.getAuthorities());
                 auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

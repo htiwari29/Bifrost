@@ -1,6 +1,6 @@
 package com.bookit.bifrost.entrypoints;
 
-\import com.bookit.bifrost.appservices.BifrostAuthService;
+import com.bookit.bifrost.appservices.BifrostAuthService;
 import com.bookit.bifrost.common.exceptions.BifrostException;
 import com.bookit.bifrost.entrypoints.dtos.RegisterRequest;
 import com.bookit.bifrost.entrypoints.responses.FailureResponseComposer;
