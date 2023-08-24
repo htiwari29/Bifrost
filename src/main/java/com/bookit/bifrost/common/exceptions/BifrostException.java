@@ -7,23 +7,24 @@ import java.util.Objects;
 
 public class BifrostException extends RuntimeException {
 
-    private final Errors errors;
+	private final Errors errors;
 
-    public BifrostException(Errors errors) {
-        super(errors.getMessage());
-        this.errors = assignErrors(errors);
-    }
+	public BifrostException(Errors errors) {
+		super(errors.getMessage());
+		this.errors = assignErrors(errors);
+	}
 
-    public BifrostException(Exception ex, Errors errors){
-        super(ex);
-        this.errors = assignErrors(errors);
-    }
+	public BifrostException(Exception ex, Errors errors) {
+		super(ex);
+		this.errors = assignErrors(errors);
+	}
 
-    private Errors assignErrors(Errors errors){
-        return Objects.isNull(errors) ? ErrorFactory.createGenericError() : errors;
-    }
+	private Errors assignErrors(Errors errors) {
+		return Objects.isNull(errors) ? ErrorFactory.createGenericError() : errors;
+	}
 
-    public Errors getErrors() {
-        return errors;
-    }
+	public Errors getErrors() {
+		return errors;
+	}
+
 }

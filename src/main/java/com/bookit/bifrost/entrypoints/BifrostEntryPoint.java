@@ -18,32 +18,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BifrostEntryPoint {
 
-    private static final Logger log = LoggerFactory.getLogger(BifrostEntryPoint.class);
+	private static final Logger log = LoggerFactory.getLogger(BifrostEntryPoint.class);
 
-    public static final String CLIENT_SECRET = "clientSecret";
+	public static final String CLIENT_SECRET = "clientSecret";
 
-    public static final String CLIENT_ID = "clientId";
+	public static final String CLIENT_ID = "clientId";
 
-    private final BifrostDataValidator bifrostDataValidator;
+	private final BifrostDataValidator bifrostDataValidator;
 
-    private final BifrostAuthService bifrostAuthService;
+	private final BifrostAuthService bifrostAuthService;
 
-    public BifrostEntryPoint(BifrostDataValidator bifrostDataValidator,
-                             BifrostAuthService bifrostAuthService) {
-        this.bifrostDataValidator = bifrostDataValidator;
-        this.bifrostAuthService = bifrostAuthService;
-    }
+	public BifrostEntryPoint(BifrostDataValidator bifrostDataValidator, BifrostAuthService bifrostAuthService) {
+		this.bifrostDataValidator = bifrostDataValidator;
+		this.bifrostAuthService = bifrostAuthService;
+	}
 
-    @PostMapping(value = "v1/user/register", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest,
-                                           @RequestHeader(CLIENT_ID) String clientId,
-                                           @RequestHeader(CLIENT_SECRET) String clientSecret){
-        try {
-            bifrostDataValidator.validateRegisterRequest(registerRequest, clientId, clientSecret);
-            return SuccessResponseComposer.composeResponse(bifrostAuthService.register(registerRequest));
-        } catch (BifrostException ex) {
-            log.error("Error in user registration", ex);
-            return FailureResponseComposer.composeResponse(ex);
-        }
-    }
+	@PostMapping(value = "v1/user/register", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest,
+			@RequestHeader(CLIENT_ID) String clientId, @RequestHeader(CLIENT_SECRET) String clientSecret) {
+		try {
+			bifrostDataValidator.validateRegisterRequest(registerRequest, clientId, clientSecret);
+			return SuccessResponseComposer.composeResponse(bifrostAuthService.register(registerRequest));
+		}
+		catch (BifrostException ex) {
+			log.error("Error in user registration", ex);
+			return FailureResponseComposer.composeResponse(ex);
+		}
+	}
+
 }

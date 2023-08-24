@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BifrostDataValidator {
-    public void validateRegisterRequest(RegisterRequest registerRequest, String clientId, String clientSecret) {
-        return;
-    }
+
+	public void validateRegisterRequest(RegisterRequest registerRequest, String clientId, String clientSecret) {
+		return;
+	}
+
 }

@@ -18,38 +18,40 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = { "com.bookit" })
 public class MongoDataSourceConfiguration extends AbstractMongoClientConfiguration {
 
-    public static final Logger log = LoggerFactory.getLogger(MongoDataSourceConfiguration.class);
+	public static final Logger log = LoggerFactory.getLogger(MongoDataSourceConfiguration.class);
 
-    private final MongoProperties mongoProperties;
+	private final MongoProperties mongoProperties;
 
-    private final Environment environment;
+	private final Environment environment;
 
-    public MongoDataSourceConfiguration(MongoProperties mongoProperties, Environment environment) {
-        this.mongoProperties = mongoProperties;
-        this.environment = environment;
-    }
+	public MongoDataSourceConfiguration(MongoProperties mongoProperties, Environment environment) {
+		this.mongoProperties = mongoProperties;
+		this.environment = environment;
+	}
 
-    @Override
-    protected String getDatabaseName(){ return mongoProperties.getDatabase(); }
+	@Override
+	protected String getDatabaseName() {
+		return mongoProperties.getDatabase();
+	}
 
-    @Override
-    public MongoClient mongoClient() {
-        return MongoClients.create(
-                MongoClientSettings.builder()
-                        .applyConnectionString(new ConnectionString(mongoProperties.getUri()))
-                        .applyToConnectionPoolSettings(settings())
-                        .build());
-    }
+	@Override
+	public MongoClient mongoClient() {
+		return MongoClients.create(
+				MongoClientSettings.builder().applyConnectionString(new ConnectionString(mongoProperties.getUri()))
+						.applyToConnectionPoolSettings(settings()).build());
+	}
 
-    private Block<ConnectionPoolSettings.Builder> settings(){
-        // Keep in config file
-//        String min = environment.getProperty("threadPool.connectionPool.minimumPoolSize");
-//        String max = environment.getProperty("threadPool.connectionPool.maximumPoolSize");
+	private Block<ConnectionPoolSettings.Builder> settings() {
+		// Keep in config file
+		// String min =
+		// environment.getProperty("threadPool.connectionPool.minimumPoolSize");
+		// String max =
+		// environment.getProperty("threadPool.connectionPool.maximumPoolSize");
 
-        return builder -> {
-            builder.minSize(5);
-            builder.maxSize(30);
-        };
-    }
+		return builder -> {
+			builder.minSize(5);
+			builder.maxSize(30);
+		};
+	}
 
 }

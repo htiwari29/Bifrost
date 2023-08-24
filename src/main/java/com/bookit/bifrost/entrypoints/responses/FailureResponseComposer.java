@@ -7,14 +7,15 @@ import org.springframework.http.ResponseEntity;
 
 public class FailureResponseComposer {
 
-    private final static Gson gson = new Gson();
+	private final static Gson gson = new Gson();
 
-    public static ResponseEntity<String> composeResponse(BifrostException response) {
-        ResponseEntity.BodyBuilder responseEntity = assignStatusCode(response);
-        return responseEntity.body(gson.toJson(response.getErrors()));
-    }
+	public static ResponseEntity<String> composeResponse(BifrostException response) {
+		ResponseEntity.BodyBuilder responseEntity = assignStatusCode(response);
+		return responseEntity.body(gson.toJson(response.getErrors()));
+	}
 
-    private static ResponseEntity.BodyBuilder assignStatusCode(BifrostException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+	private static ResponseEntity.BodyBuilder assignStatusCode(BifrostException ex) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

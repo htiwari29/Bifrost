@@ -1,8 +1,15 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://himanshu:@localhost:27017/auth_db
+      uri: mongodb://himanshu:mongo123@127.0.0.1:27017/
       database: auth_db
+  cloud:
+    config:
+      enabled: false
 
 server:
   port: 8081
+
+logging:
+  level:
+    root: DEBUG
