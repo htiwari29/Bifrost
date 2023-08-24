@@ -8,16 +8,16 @@ import org.slf4j.LoggerFactory;
 
 public class InvalidDataException extends BifrostException {
 
-    public static final Logger log = LoggerFactory.getLogger(InvalidDataException.class);
+	public static final Logger log = LoggerFactory.getLogger(InvalidDataException.class);
 
-    public InvalidDataException(Exception ex, Errors errors) {
-        super(ex, errors);
-    }
+	public InvalidDataException(Exception ex, Errors errors) {
+		super(ex, errors);
+	}
 
-    public static InvalidDataException invalidDataException(TargetType targetType, String message, int code) {
-        log.error("Invalid data in request body/params");
-        throw new InvalidDataException(new Exception("Invalid Request"),
-                ErrorFactory.createInvalidRequestError(targetType, message, code));
-    }
+	public static InvalidDataException invalidDataException(TargetType targetType, String message, int code) {
+		log.error("Invalid data in request body/params");
+		throw new InvalidDataException(new Exception("Invalid Request"),
+				ErrorFactory.createInvalidRequestError(targetType, message, code));
+	}
 
 }

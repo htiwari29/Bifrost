@@ -6,51 +6,51 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "users")
 public class User {
 
-    @Id
-    private String id;
+	@Id
+	private String id;
 
-    private String username;
+	private String username;
 
-    private String password;
+	private String password;
 
-    private String tenantId;
+	private String tenantId;
 
-    public User(String id, String username, String password, String tenantId) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.tenantId = tenantId;
-    }
+	public User(String username, String password, String tenantId) {
+		this.username = username;
+		this.password = password;
+		this.tenantId = tenantId;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getTenantId() {
-        return tenantId;
-    }
+	public String getTenantId() {
+		return tenantId;
+	}
 
-    public void setTenantId(String tenantId) {
-        this.tenantId = tenantId;
-    }
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
 }

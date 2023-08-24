@@ -1,6 +1,6 @@
 package com.bookit.bifrost.filters;
 
-import com.bookit.bifrost.appservices.UserService;
+import com.bookit.bifrost.appservices.UserDetailService;
 import com.bookit.bifrost.common.util.JWTHelper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,42 +20,43 @@ import java.util.Objects;
 
 public class TokenFilter extends OncePerRequestFilter {
 
-    private static final Logger log = LoggerFactory.getLogger(TokenFilter.class);
+	private static final Logger log = LoggerFactory.getLogger(TokenFilter.class);
 
-    private final JWTHelper jwtHelper;
+	private final JWTHelper jwtHelper;
 
-    private final UserService userService;
+	private final UserDetailService userDetailService;
 
-    public TokenFilter(JWTHelper jwtHelper, UserService userService) {
-        this.jwtHelper = jwtHelper;
-        this.userService = userService;
-    }
+	public TokenFilter(JWTHelper jwtHelper, UserDetailService userDetailService) {
+		this.jwtHelper = jwtHelper;
+		this.userDetailService = userDetailService;
+	}
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        try {
-            String jwt = parseJwt(request);
-            if (Objects.nonNull(jwt) && jwtHelper.validateToken(jwt)){
-                String username = jwtHelper.userNameFromToken(jwt);
-                UserDetails userDetails = userService.loadUserByUsername(username);
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
-                        null, userDetails.getAuthorities());
-                auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(auth);
-            }
-        } catch (Exception ex) {
-            log.error("Error while initialising user authentication process");
-        }
-        filterChain.doFilter(request, response);
-    }
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		try {
+			String jwt = parseJwt(request);
+			if (Objects.nonNull(jwt) && jwtHelper.validateToken(jwt)) {
+				String username = jwtHelper.userNameFromToken(jwt);
+				UserDetails userDetails = userDetailService.loadUserByUsername(username);
+				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null,
+						userDetails.getAuthorities());
+				auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				SecurityContextHolder.getContext().setAuthentication(auth);
+			}
+		}
+		catch (Exception ex) {
+			log.error("Error while initialising user authentication process");
+		}
+		filterChain.doFilter(request, response);
+	}
 
-    private String parseJwt(HttpServletRequest request) {
-        String header = request.getHeader("Authorization");
-        if (StringUtils.hasText(header) && header.startsWith("Bearer ")){
-            return header.substring(7);
-        }
-        return null;
-    }
+	private String parseJwt(HttpServletRequest request) {
+		String header = request.getHeader("Authorization");
+		if (StringUtils.hasText(header) && header.startsWith("Bearer ")) {
+			return header.substring(7);
+		}
+		return null;
+	}
 
 }
