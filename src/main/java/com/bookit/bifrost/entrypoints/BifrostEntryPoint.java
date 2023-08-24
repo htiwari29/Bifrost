@@ -2,6 +2,7 @@ package com.bookit.bifrost.entrypoints;
 
 import com.bookit.bifrost.appservices.BifrostAuthService;
 import com.bookit.bifrost.common.exceptions.BifrostException;
+import com.bookit.bifrost.entrypoints.dtos.LoginRequest;
 import com.bookit.bifrost.entrypoints.dtos.RegisterRequest;
 import com.bookit.bifrost.entrypoints.responses.FailureResponseComposer;
 import com.bookit.bifrost.entrypoints.responses.SuccessResponseComposer;
@@ -39,6 +40,19 @@ public class BifrostEntryPoint {
 		try {
 			bifrostDataValidator.validateRegisterRequest(registerRequest, clientId, clientSecret);
 			return SuccessResponseComposer.composeResponse(bifrostAuthService.register(registerRequest));
+		}
+		catch (BifrostException ex) {
+			log.error("Error in user registration", ex);
+			return FailureResponseComposer.composeResponse(ex);
+		}
+	}
+
+	@PostMapping(value = "v1/user/login", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest,
+			@RequestHeader(CLIENT_ID) String clientId, @RequestHeader(CLIENT_SECRET) String clientSecret) {
+		try {
+			bifrostDataValidator.validateLoginRequest(loginRequest, clientId, clientSecret);
+			return SuccessResponseComposer.composeResponse(bifrostAuthService.login(loginRequest));
 		}
 		catch (BifrostException ex) {
 			log.error("Error in user registration", ex);
