@@ -3,13 +3,10 @@ spring:
     mongodb:
       uri: mongodb://himanshu:mongo123@127.0.0.1:27017/
       database: auth_db
-  cloud:
-    config:
-      enabled: false
 
 server:
   port: 8081
 
 logging:
   level:
-    root: DEBUG
+    root: INFO

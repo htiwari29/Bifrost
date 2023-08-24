@@ -9,7 +9,6 @@ import com.bookit.bifrost.entrypoints.dtos.RegisterRequest;
 import com.bookit.bifrost.entrypoints.responses.BifrostRegisterResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,13 +20,9 @@ public class BifrostAuthService {
 
 	private final UserCreationService userCreationService;
 
-	private final BCryptPasswordEncoder encoder;
-
-	public BifrostAuthService(UserRetrievalService userRetrievalService, UserCreationService userCreationService,
-			BCryptPasswordEncoder encoder) {
+	public BifrostAuthService(UserRetrievalService userRetrievalService, UserCreationService userCreationService) {
 		this.userRetrievalService = userRetrievalService;
 		this.userCreationService = userCreationService;
-		this.encoder = encoder;
 	}
 
 	public BifrostRegisterResponse register(RegisterRequest registerRequest) {
@@ -39,7 +34,7 @@ public class BifrostAuthService {
 		}
 		catch (UserNotFoundException ex) {
 			log.debug("Creating user with given credentials");
-			User user = new User(registerRequest.getUsername(), encoder.encode(registerRequest.getPassword()),
+			User user = new User(registerRequest.getUsername(), registerRequest.getPassword(),
 					registerRequest.getTenantId());
 			userCreationService.save(user);
 			return new BifrostRegisterResponse(TargetType.USER_CREATED.name(), user.getUsername());
