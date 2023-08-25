@@ -1,6 +1,6 @@
 package com.bookit.bifrost.common.config;
 
-import com.bookit.bifrost.filters.TokenFilter;
+import com.bookit.bifrost.common.filters.TokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

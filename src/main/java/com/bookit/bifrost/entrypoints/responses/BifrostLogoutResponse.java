@@ -1,6 +1,6 @@
 package com.bookit.bifrost.entrypoints.responses;
 
-public class BifrostLogoutResponse extends BifrostResponse {
+public class BifrostLogoutResponse implements BifrostResponse {
 
 	private String message;
 

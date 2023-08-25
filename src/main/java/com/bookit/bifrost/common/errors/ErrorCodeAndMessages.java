@@ -77,4 +77,8 @@ public class ErrorCodeAndMessages {
 
 	public static final int ERROR_WHILE_RETRIEVING_USER_BY_USERNAME_AND_TENANT_ID_CODE = 1030;
 
+	public static final String INVALID_TOKEN = "Invalid token";
+
+	public static final int INVALID_TOKEN_CODE = 1030;
+
 }

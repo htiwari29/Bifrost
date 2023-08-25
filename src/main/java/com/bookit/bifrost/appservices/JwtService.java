@@ -27,6 +27,8 @@ public class JwtService {
 
 	public static final Logger log = LoggerFactory.getLogger(JwtService.class);
 
+	public static final String ERROR_WHILE_DECODING_TOKEN = "Error while decoding token";
+
 	public String generateToken(String subject, Map<String, String> claims, int hours) {
 		if (CollectionUtils.isEmpty(claims))
 			throw InvalidDataException.invalidDataException(TargetType.EMPTY_JWT_CLAIMS, "Error in token creation",
@@ -53,7 +55,7 @@ public class JwtService {
 			return decodedJWT.getSubject();
 		}
 		catch (Exception ex) {
-			throw InvalidDataException.invalidDataException(TargetType.JWT_CLAIM_PARSE, "Error while decoding token",
+			throw InvalidDataException.invalidDataException(TargetType.JWT_CLAIM_PARSE, ERROR_WHILE_DECODING_TOKEN,
 					1012);
 		}
 	}
@@ -66,7 +68,7 @@ public class JwtService {
 			return jsonNode.get("tenantId").asText();
 		}
 		catch (Exception ex) {
-			throw InvalidDataException.invalidDataException(TargetType.JWT_CLAIM_PARSE, "Error while decoding token",
+			throw InvalidDataException.invalidDataException(TargetType.JWT_CLAIM_PARSE, ERROR_WHILE_DECODING_TOKEN,
 					1012);
 		}
 	}
@@ -108,7 +110,7 @@ public class JwtService {
 		}
 		catch (Exception ex) {
 			log.error("Error while generating session details from token");
-			throw InvalidDataException.invalidDataException(TargetType.JWT_CLAIM_PARSE, "Error while decoding token",
+			throw InvalidDataException.invalidDataException(TargetType.JWT_CLAIM_PARSE, ERROR_WHILE_DECODING_TOKEN,
 					1012);
 		}
 	}

@@ -83,4 +83,9 @@ public class ErrorFactory {
 				ErrorCodeAndMessages.ERROR_WHILE_USER_AUTHENTICATION);
 	}
 
+	public static Errors invalidTokenError() {
+		return new Errors(TargetType.INVALID_TOKEN.name(), ErrorCodeAndMessages.INVALID_TOKEN_CODE,
+				ErrorCodeAndMessages.INVALID_TOKEN);
+	}
+
 }

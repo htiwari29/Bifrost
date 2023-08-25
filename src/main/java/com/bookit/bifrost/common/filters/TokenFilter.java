@@ -1,4 +1,4 @@
-package com.bookit.bifrost.filters;
+package com.bookit.bifrost.common.filters;
 
 import com.bookit.bifrost.appservices.UserDetailService;
 import com.bookit.bifrost.appservices.JwtService;

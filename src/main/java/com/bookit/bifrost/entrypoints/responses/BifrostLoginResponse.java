@@ -1,6 +1,6 @@
 package com.bookit.bifrost.entrypoints.responses;
 
-public class BifrostLoginResponse extends BifrostResponse {
+public class BifrostLoginResponse implements BifrostResponse {
 
 	private String sessionToken;
 

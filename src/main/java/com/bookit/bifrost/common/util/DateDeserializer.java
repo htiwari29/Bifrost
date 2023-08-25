@@ -8,12 +8,11 @@ import java.io.IOException;
 
 public class DateDeserializer extends JsonDeserializer<Date> {
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-
 	@Override
 	public Date deserialize(com.fasterxml.jackson.core.JsonParser jsonParser,
 			com.fasterxml.jackson.databind.DeserializationContext deserializationContext) throws IOException {
 		String date = jsonParser.getText();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 		try {
 			return dateFormat.parse(date);
 		}

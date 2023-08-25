@@ -11,8 +11,6 @@ import java.util.Objects;
 
 public class UserDetail implements UserDetails {
 
-	public static final long serialVersionId = 1L;
-
 	private String id;
 
 	private String username;

@@ -1,6 +1,7 @@
 package com.bookit.bifrost.appservices;
 
 import com.bookit.bifrost.common.errors.ErrorFactory;
+import com.bookit.bifrost.common.exceptions.InvalidTokenException;
 import com.bookit.bifrost.common.exceptions.SessionCreationException;
 import com.bookit.bifrost.common.exceptions.SessionLogoutException;
 import com.bookit.bifrost.domain.Session;
@@ -39,21 +40,25 @@ public class SessionService {
 	}
 
 	public void logout(String sessionToken, String username) {
-		try {
-			Optional<Session> optionalSession = sessionRepository.findBySessionTokenAndUsername(sessionToken, username);
-			if (optionalSession.isPresent()) {
-				Session session = optionalSession.get();
-				session.setValid(false);
-				session.setLastAccessed(new Date(System.currentTimeMillis()));
-				sessionRepository.save(session);
-			}
-			else {
-				log.error("User session not found by username & sessionToken");
-				throw new SessionLogoutException(ErrorFactory.sessionNotFoundBySessionTokenAndUsername());
-			}
+		Optional<Session> session = sessionRepository.findBySessionTokenAndUsername(sessionToken, username);
+		if (session.isPresent()) {
+			terminateSession(session.get());
 		}
-		catch (Exception ex) {
-			throw new SessionLogoutException(ex, ErrorFactory.exceptionDuringUserLogout());
+		else {
+			log.error("User session not found by username & sessionToken");
+			throw new SessionLogoutException(ErrorFactory.sessionNotFoundBySessionTokenAndUsername());
+		}
+	}
+
+	private void terminateSession(Session session) {
+		if (session.isValid()) {
+			session.setValid(false);
+			session.setLastAccessed(new Date(System.currentTimeMillis()));
+			sessionRepository.save(session);
+		}
+		else {
+			log.error("Invalid session token provided");
+			throw new InvalidTokenException(ErrorFactory.invalidTokenError());
 		}
 	}
 
