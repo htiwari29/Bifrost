@@ -1,6 +1,6 @@
 package com.bookit.bifrost.entrypoints.responses;
 
-public class BifrostRegisterResponse implements BifrostResponse {
+public class BifrostLogoutResponse implements BifrostResponse {
 
 	private String message;
 
@@ -22,7 +22,7 @@ public class BifrostRegisterResponse implements BifrostResponse {
 		this.username = username;
 	}
 
-	public BifrostRegisterResponse(String message, String username) {
+	public BifrostLogoutResponse(String message, String username) {
 		this.message = message;
 		this.username = username;
 	}

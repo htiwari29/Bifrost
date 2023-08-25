@@ -2,6 +2,7 @@ package com.bookit.bifrost.appservices;
 
 import com.bookit.bifrost.common.errors.ErrorFactory;
 import com.bookit.bifrost.common.exceptions.BifrostException;
+import com.bookit.bifrost.common.exceptions.UserException;
 import com.bookit.bifrost.common.exceptions.UserNotFoundException;
 import com.bookit.bifrost.domain.User;
 import com.bookit.bifrost.domain.repositories.UserRepository;
@@ -24,7 +25,7 @@ public class UserRetrievalService {
 			user = userRepository.findByUsername(username);
 		}
 		catch (Exception ex) {
-			throw new BifrostException(ex, ErrorFactory.createGenericError());
+			throw new UserException(ex, ErrorFactory.whileRetrievingUserByUsername());
 		}
 		if (Objects.isNull(user))
 			throw new BifrostException(ErrorFactory.userNotFoundWhileRetrievingUserByUsername());
@@ -37,7 +38,7 @@ public class UserRetrievalService {
 			user = userRepository.findByUsernameAndTenantId(username, tenantId);
 		}
 		catch (Exception ex) {
-			throw new BifrostException(ex, ErrorFactory.createGenericError());
+			throw new UserException(ex, ErrorFactory.whileRetrievingUserByUsernameAndTenantId());
 		}
 		if (Objects.isNull(user))
 			throw new UserNotFoundException(ErrorFactory.userNotFoundWhileRetrievingUserByUsernameAndTenantId());

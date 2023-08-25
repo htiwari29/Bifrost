@@ -53,4 +53,32 @@ public class ErrorCodeAndMessages {
 
 	public static final int JWT_CREATION_ERROR_CODE = 1011;
 
+	public static final String ERROR_WHILE_CREATING_SESSION_MSG = "Error while creating session";
+
+	public static final int ERROR_WHILE_CREATING_SESSION_CODE = 1025;
+
+	public static final String INVALID_SESSION_TOKEN_OR_USERNAME = "Invalid session token or username";
+
+	public static final int INVALID_SESSION_TOKEN_OR_USERNAME_CODE = 1026;
+
+	public static final String ERROR_DURING_LOGOUT_MSG = "Error while user logout";
+
+	public static final int ERROR_DURING_LOGOUT_CODE = 1027;
+
+	public static final String ERROR_WHILE_USER_AUTHENTICATION = "Error while user authentication";
+
+	public static final int ERROR_WHILE_USER_AUTH_CODE = 1028;
+
+	public static final String ERROR_WHILE_RETRIEVING_USER_BY_USERNAME = "Error while retrieving user by username";
+
+	public static final int ERROR_WHILE_RETRIEVING_USER_BY_USERNAME_CODE = 1029;
+
+	public static final String ERROR_WHILE_RETRIEVING_USER_BY_USERNAME_AND_TENANT_ID = "Error while retrieving user by username and tenantId";
+
+	public static final int ERROR_WHILE_RETRIEVING_USER_BY_USERNAME_AND_TENANT_ID_CODE = 1030;
+
+	public static final String INVALID_TOKEN = "Invalid token";
+
+	public static final int INVALID_TOKEN_CODE = 1030;
+
 }
