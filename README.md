@@ -1,4 +1,4 @@
-# Bifrost: Authentication Service
+# Bifrost
 
 Bifrost is an authentication service designed to provide a centralized and secure authentication mechanism for your applications. Inspired by the concept of a single point of authentication in the THOR movies, Bifrost ensures that your users' identities are protected and verified across various services.
 
