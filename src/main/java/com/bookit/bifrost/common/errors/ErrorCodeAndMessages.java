@@ -53,4 +53,8 @@ public class ErrorCodeAndMessages {
 
 	public static final int JWT_CREATION_ERROR_CODE = 1011;
 
+	public static final String ERROR_WHILE_CREATING_SESSION_MSG = "Error while creating session";
+
+	public static final int ERROR_WHILE_CREATING_SESSION_CODE = 1025;
+
 }

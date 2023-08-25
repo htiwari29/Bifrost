@@ -1,6 +1,5 @@
 package com.bookit.bifrost.appservices;
 
-import com.bookit.bifrost.common.util.JWTHelper;
 import com.bookit.bifrost.domain.Token;
 import org.springframework.stereotype.Service;
 
@@ -12,20 +11,20 @@ import java.util.UUID;
 @Service
 public class TokenCreationService {
 
-	private final JWTHelper jwtHelper;
+	private final JwtService jwtService;
 
-	public TokenCreationService(JWTHelper jwtHelper) {
-		this.jwtHelper = jwtHelper;
+	public TokenCreationService(JwtService jwtService) {
+		this.jwtService = jwtService;
 	}
 
 	public String createSessionToken(String username, Map<String, String> claims) {
 		int sessionTokenExpirationTimeInHours = 4;
-		return jwtHelper.generateToken(username, claims, sessionTokenExpirationTimeInHours);
+		return jwtService.generateToken(username, claims, sessionTokenExpirationTimeInHours);
 	}
 
 	public String createAccessToken(String username, Map<String, String> claims) {
 		int accessTokenExpirationTimeInHours = 4;
-		return jwtHelper.generateToken(username, claims, accessTokenExpirationTimeInHours);
+		return jwtService.generateToken(username, claims, accessTokenExpirationTimeInHours);
 	}
 
 	public Token tokenDetails(String username, String tenantId) {

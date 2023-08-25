@@ -1,13 +1,14 @@
 package com.bookit.bifrost.filters;
 
 import com.bookit.bifrost.appservices.UserDetailService;
-import com.bookit.bifrost.common.util.JWTHelper;
+import com.bookit.bifrost.appservices.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,22 +23,19 @@ public class TokenFilter extends OncePerRequestFilter {
 
 	private static final Logger log = LoggerFactory.getLogger(TokenFilter.class);
 
-	private final JWTHelper jwtHelper;
+	@Autowired
+	private JwtService jwtService;
 
-	private final UserDetailService userDetailService;
-
-	public TokenFilter(JWTHelper jwtHelper, UserDetailService userDetailService) {
-		this.jwtHelper = jwtHelper;
-		this.userDetailService = userDetailService;
-	}
+	@Autowired
+	private UserDetailService userDetailService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		try {
 			String jwt = parseJwt(request);
-			if (Objects.nonNull(jwt) && jwtHelper.validateToken(jwt)) {
-				String username = jwtHelper.userNameFromToken(jwt);
+			if (Objects.nonNull(jwt) && jwtService.validateToken(jwt)) {
+				String username = jwtService.userNameFromToken(jwt);
 				UserDetails userDetails = userDetailService.loadUserByUsername(username);
 				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null,
 						userDetails.getAuthorities());

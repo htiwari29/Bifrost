@@ -53,4 +53,9 @@ public class ErrorFactory {
 				ErrorCodeAndMessages.JWT_CREATION_ERROR_MSG);
 	}
 
+	public static Errors whileSavingSession() {
+		return new Errors(TargetType.SESSION_CREATION.name(), ErrorCodeAndMessages.ERROR_WHILE_CREATING_SESSION_CODE,
+				ErrorCodeAndMessages.ERROR_WHILE_CREATING_SESSION_MSG);
+	}
+
 }

@@ -35,14 +35,17 @@ public class BifrostAuthService {
 
 	private final TokenCreationService tokenCreationService;
 
+	private final SessionCreationService sessionCreationService;
+
 	public BifrostAuthService(UserRetrievalService userRetrievalService, UserCreationService userCreationService,
 			BCryptPasswordEncoder encoder, AuthenticationManager authenticationManager,
-			TokenCreationService tokenCreationService) {
+			TokenCreationService tokenCreationService, SessionCreationService sessionCreationService) {
 		this.userRetrievalService = userRetrievalService;
 		this.userCreationService = userCreationService;
 		this.encoder = encoder;
 		this.authenticationManager = authenticationManager;
 		this.tokenCreationService = tokenCreationService;
+		this.sessionCreationService = sessionCreationService;
 	}
 
 	public BifrostRegisterResponse register(RegisterRequest registerRequest) {
@@ -50,6 +53,7 @@ public class BifrostAuthService {
 			log.debug("Checking if user exists with given credentials");
 			userRetrievalService.userByUsernameAndTenantId(registerRequest.getUsername(),
 					registerRequest.getTenantId());
+			log.error("User exists with given credentials");
 			throw new UserCreationException(ErrorFactory.userExistsWithGivenUsernameAndTenantId());
 		}
 		catch (UserNotFoundException ex) {
@@ -65,7 +69,7 @@ public class BifrostAuthService {
 		try {
 			authenticateUser(loginRequest);
 			Token token = tokenCreationService.tokenDetails(loginRequest.getUsername(), loginRequest.getTenantId());
-			// TODO: save token in session
+			sessionCreationService.saveSession(token);
 			return new BifrostLoginResponse(token.getAccessToken(), token.getSessionToken());
 		}
 		catch (InternalAuthenticationServiceException ex) {
