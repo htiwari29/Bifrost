@@ -27,7 +27,7 @@ public class Session {
 
 	private String sessionToken;
 
-	private String accessToken;
+	private String refreshToken;
 
 	@JsonProperty(value = "tenantId", required = true)
 	private String tenantId;
@@ -41,13 +41,13 @@ public class Session {
 
 	private Date lastAccessed;
 
-	public Session(String id, String jti, String username, String sessionToken, String accessToken, String tenantId,
+	public Session(String id, String jti, String username, String sessionToken, String refreshToken, String tenantId,
 			Date creationDate, boolean valid, Date lastAccessed) {
 		this.id = id;
 		this.jti = jti;
 		this.username = username;
 		this.sessionToken = sessionToken;
-		this.accessToken = accessToken;
+		this.refreshToken = refreshToken;
 		this.tenantId = tenantId;
 		this.creationDate = creationDate;
 		this.valid = valid;
@@ -89,12 +89,12 @@ public class Session {
 		this.sessionToken = sessionToken;
 	}
 
-	public String getAccessToken() {
-		return accessToken;
+	public String getRefreshToken() {
+		return refreshToken;
 	}
 
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
 	}
 
 	public String getTenantId() {

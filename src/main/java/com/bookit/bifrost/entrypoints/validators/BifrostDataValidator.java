@@ -15,4 +15,8 @@ public class BifrostDataValidator {
 		return;
 	}
 
+	public void validateLogoutRequest(String sessionToken, String username) {
+		return;
+	}
+
 }

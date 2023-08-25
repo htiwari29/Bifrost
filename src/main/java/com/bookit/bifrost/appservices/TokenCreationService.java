@@ -22,15 +22,15 @@ public class TokenCreationService {
 		return jwtService.generateToken(username, claims, sessionTokenExpirationTimeInHours);
 	}
 
-	public String createAccessToken(String username, Map<String, String> claims) {
-		int accessTokenExpirationTimeInHours = 4;
-		return jwtService.generateToken(username, claims, accessTokenExpirationTimeInHours);
+	public String createRefreshToken(String username, Map<String, String> claims) {
+		int refreshTokenExpirationTimeInHours = 4;
+		return jwtService.generateToken(username, claims, refreshTokenExpirationTimeInHours);
 	}
 
 	public Token tokenDetails(String username, String tenantId) {
 		Token token = new Token();
 		Map<String, String> claims = generateClaims(username, tenantId);
-		token.setAccessToken(createAccessToken(username, claims));
+		token.setRefreshToken(createRefreshToken(username, claims));
 		token.setSessionToken(createSessionToken(username, claims));
 		return token;
 	}

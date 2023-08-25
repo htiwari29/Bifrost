@@ -100,7 +100,7 @@ public class JwtService {
 			String payload = decodePayload(JWT.decode(token.getSessionToken()).getPayload());
 			ObjectMapper objectMapper = new ObjectMapper();
 			Session session = objectMapper.readValue(payload, Session.class);
-			session.setAccessToken(token.getAccessToken());
+			session.setRefreshToken(token.getRefreshToken());
 			session.setSessionToken(token.getSessionToken());
 			session.setValid(true);
 			session.setLastAccessed(new Date(System.currentTimeMillis()));

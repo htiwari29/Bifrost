@@ -21,6 +21,16 @@ public class ErrorFactory {
 				ErrorCodeAndMessages.USER_EXISTS_WITH_GIVEN_CREDENTIALS_MSG);
 	}
 
+	public static Errors whileRetrievingUserByUsername() {
+		return new Errors(TargetType.USER.name(), ErrorCodeAndMessages.ERROR_WHILE_RETRIEVING_USER_BY_USERNAME_CODE,
+				ErrorCodeAndMessages.ERROR_WHILE_RETRIEVING_USER_BY_USERNAME);
+	}
+
+	public static Errors whileRetrievingUserByUsernameAndTenantId() {
+		return new Errors(TargetType.USER.name(), ErrorCodeAndMessages.ERROR_WHILE_RETRIEVING_USER_BY_USERNAME_CODE,
+				ErrorCodeAndMessages.ERROR_WHILE_RETRIEVING_USER_BY_USERNAME);
+	}
+
 	public static Errors databaseFailureExceptionWhileCreatingUser() {
 		return new Errors(TargetType.USER_CREATION.name(), ErrorCodeAndMessages.ERROR_WHEN_CREATING_USER_CODE,
 				ErrorCodeAndMessages.ERROR_WHEN_CREATING_USER_MSG);
@@ -54,8 +64,23 @@ public class ErrorFactory {
 	}
 
 	public static Errors whileSavingSession() {
-		return new Errors(TargetType.SESSION_CREATION.name(), ErrorCodeAndMessages.ERROR_WHILE_CREATING_SESSION_CODE,
+		return new Errors(TargetType.LOGIN.name(), ErrorCodeAndMessages.ERROR_WHILE_CREATING_SESSION_CODE,
 				ErrorCodeAndMessages.ERROR_WHILE_CREATING_SESSION_MSG);
+	}
+
+	public static Errors sessionNotFoundBySessionTokenAndUsername() {
+		return new Errors(TargetType.LOGOUT.name(), ErrorCodeAndMessages.INVALID_SESSION_TOKEN_OR_USERNAME_CODE,
+				ErrorCodeAndMessages.INVALID_SESSION_TOKEN_OR_USERNAME);
+	}
+
+	public static Errors exceptionDuringUserLogout() {
+		return new Errors(TargetType.LOGOUT.name(), ErrorCodeAndMessages.ERROR_DURING_LOGOUT_CODE,
+				ErrorCodeAndMessages.ERROR_DURING_LOGOUT_MSG);
+	}
+
+	public static Errors errorWhileAuthenticatingUser() {
+		return new Errors(TargetType.LOGIN.name(), ErrorCodeAndMessages.ERROR_WHILE_USER_AUTH_CODE,
+				ErrorCodeAndMessages.ERROR_WHILE_USER_AUTHENTICATION);
 	}
 
 }

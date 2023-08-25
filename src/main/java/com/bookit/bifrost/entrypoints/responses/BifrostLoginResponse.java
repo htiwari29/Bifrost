@@ -2,7 +2,7 @@ package com.bookit.bifrost.entrypoints.responses;
 
 public class BifrostLoginResponse extends BifrostResponse {
 
-	private String accessToken;
+	private String sessionToken;
 
 	private String refreshToken;
 
@@ -10,18 +10,18 @@ public class BifrostLoginResponse extends BifrostResponse {
 
 	private String expiryDate;
 
-	public BifrostLoginResponse(String accessToken, String refreshToken) {
-		this.accessToken = accessToken;
+	public BifrostLoginResponse(String sessionToken, String refreshToken) {
+		this.sessionToken = sessionToken;
 		this.refreshToken = refreshToken;
 		this.tokenType = "BEARER";
 	}
 
-	public String getAccessToken() {
-		return accessToken;
+	public String getSessionToken() {
+		return sessionToken;
 	}
 
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
+	public void setSessionToken(String sessionToken) {
+		this.sessionToken = sessionToken;
 	}
 
 	public String getRefreshToken() {

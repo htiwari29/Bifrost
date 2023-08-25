@@ -2,6 +2,8 @@ package com.bookit.bifrost.filters;
 
 import com.bookit.bifrost.appservices.UserDetailService;
 import com.bookit.bifrost.appservices.JwtService;
+import com.bookit.bifrost.common.errors.ErrorFactory;
+import com.bookit.bifrost.common.exceptions.UserException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,6 +47,7 @@ public class TokenFilter extends OncePerRequestFilter {
 		}
 		catch (Exception ex) {
 			log.error("Error while initializing user authentication process");
+			throw new UserException(ex, ErrorFactory.errorWhileAuthenticatingUser());
 		}
 		filterChain.doFilter(request, response);
 	}

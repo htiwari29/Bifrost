@@ -55,7 +55,20 @@ public class BifrostEntryPoint {
 			return SuccessResponseComposer.composeResponse(bifrostAuthService.login(loginRequest));
 		}
 		catch (BifrostException ex) {
-			log.error("Error in user registration", ex);
+			log.error("Error in user login", ex);
+			return FailureResponseComposer.composeResponse(ex);
+		}
+	}
+
+	@PostMapping(value = "v1/user/logout", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> logout(@RequestHeader("sessionToken") String sessionToken,
+			@RequestHeader("username") String username) {
+		try {
+			bifrostDataValidator.validateLogoutRequest(sessionToken, username);
+			return SuccessResponseComposer.composeResponse(bifrostAuthService.logout(sessionToken, username));
+		}
+		catch (BifrostException ex) {
+			log.error("Error in user logout", ex);
 			return FailureResponseComposer.composeResponse(ex);
 		}
 	}
